@@ -8,8 +8,8 @@
 - Phase: 3
 - Current story: none
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Synced stale BMAD state after Claude ACP finished `create-architecture`; architecture artifact exists at `_bmad-output/planning-artifacts/architecture.md` and is ready to commit.
-- Next step: Commit & push Phase 3 architecture artifacts, then start workflow: create-epics-and-stories
+- Last action: Claude ACP completed `create-epics-and-stories`; artifact written to `_bmad-output/planning-artifacts/epics.md` and BMAD state now marks the workflow complete.
+- Next step: Commit & push epics/stories artifacts, then start workflow: check-implementation-readiness
 
 ## Stories
 - Not generated yet

@@ -25,6 +25,13 @@
       "agentName": "John",
       "completedAt": "2026-03-15T22:00:18.207Z",
       "outputFile": "_bmad-output/planning-artifacts/prd.md"
+    },
+    {
+      "id": "create-epics-and-stories",
+      "agentId": "pm",
+      "agentName": "John",
+      "completedAt": "2026-03-15T23:01:00.000Z",
+      "outputFile": "_bmad-output/planning-artifacts/epics.md"
     }
   ]
 }
