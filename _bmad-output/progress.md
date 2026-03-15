@@ -5,11 +5,11 @@
 - task_ids: phase1=unknown, phase2=unknown
 
 ## Current State
-- Phase: 2
+- Phase: 3
 - Current story: none
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Completed create-prd workflow (output: planning-artifacts/prd.md)
-- Next step: Commit & push Phase 2 PRD, then start workflow: create-architecture
+- Last action: Synced stale BMAD state after Claude ACP finished `create-architecture`; architecture artifact exists at `_bmad-output/planning-artifacts/architecture.md` and is ready to commit.
+- Next step: Commit & push Phase 3 architecture artifacts, then start workflow: create-epics-and-stories
 
 ## Stories
 - Not generated yet
@@ -17,7 +17,9 @@
 ## Completed Workflows
 - [x] project initialization
 - [x] create-product-brief (commit: ae6b332, output: planning-artifacts/product-brief-Linkboard-2026-03-15.md)
-- [x] create-prd (output: planning-artifacts/prd.md)
+- [x] create-prd (commit: fd8da93, output: planning-artifacts/prd.md)
+- [x] create-architecture (output: planning-artifacts/architecture.md)
 
 ## Blockers
-- Mission Control project/task creation returned duplicate/conflict responses; pipeline continuing with progress.md as source of truth.
+- Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
+- BMAD local state was stale (PRD completed in git/output, state.json still marked create-prd active). Backed up original state to `_bmad/state.json.bak-2026-03-15T2230Z` and repaired it so architecture could start.
