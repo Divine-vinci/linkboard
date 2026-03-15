@@ -8,10 +8,10 @@
     "agentId": "pm",
     "agentName": "John",
     "mode": "yolo",
-    "currentStep": 1,
+    "currentStep": 2,
     "totalSteps": 12,
-    "currentStepFile": "/home/clawd/.openclaw/extensions/bmad-method/bmad-method/bmm/workflows/2-plan-workflows/create-prd/steps-c/step-01-init.md",
-    "outputFile": "",
+    "currentStepFile": "/home/clawd/.openclaw/extensions/bmad-method/bmad-method/bmm/workflows/2-plan-workflows/create-prd/steps-c/step-02-discovery.md",
+    "outputFile": "/home/clawd/projects/linkboard/_bmad-output/planning-artifacts/prd.md",
     "startedAt": "2026-03-15T22:00:18.207Z"
   },
   "completedWorkflows": [
