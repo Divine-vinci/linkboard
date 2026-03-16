@@ -8,8 +8,8 @@
 - Phase: 4
 - Current story: 2.3 Edit Bookmark
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Heartbeat resumed stalled Story 2.2 code-review, confirmed ACP session `agent:claude:acp:8b3444bc-123a-42ad-95f3-c802abd59b35` had already completed, ran test/lint/build successfully, then finalized the Story 2.2 loop.
-- Next step: Commit & push Story 2.2 completion, then start story 2.3: Edit Bookmark via the Phase 4 story loop
+- Last action: Heartbeat resumed stalled Story 2.2 code-review, confirmed ACP session `agent:claude:acp:8b3444bc-123a-42ad-95f3-c802abd59b35` had already completed, ran test/lint/build successfully, finalized the Story 2.2 loop, and pushed commit `439d080`.
+- Next step: Start story 2.3: Edit Bookmark via the Phase 4 story loop
 
 ## ACP Session
 - acp_session_key: agent:claude:acp:8b3444bc-123a-42ad-95f3-c802abd59b35
@@ -35,7 +35,7 @@
 - [x] Story 1.3: Route Protection & Session Persistence
 - [x] Story 1.4: Landing Page (commit: aaacddf)
 - [x] Story 2.1: Save Bookmark with Metadata Fetching (commit: c8a46da)
-- [x] Story 2.2: Bookmark Dashboard & Card Display
+- [x] Story 2.2: Bookmark Dashboard & Card Display (commit: 439d080)
 - [ ] Story 2.3: Edit Bookmark
 - [ ] Story 2.4: Delete Bookmark
 - [ ] Story 3.1: Tag Creation & Assignment
