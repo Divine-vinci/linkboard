@@ -3,7 +3,17 @@
   "projectPath": "/home/clawd/projects/linkboard",
   "createdAt": "2026-03-15T21:53:08.129Z",
   "currentPhase": "solutioning",
-  "activeWorkflow": null,
+  "activeWorkflow": {
+    "id": "check-implementation-readiness",
+    "agentId": "architect",
+    "agentName": "Winston",
+    "mode": "yolo",
+    "currentStep": 1,
+    "totalSteps": 6,
+    "currentStepFile": "/home/clawd/.openclaw/extensions/bmad-method/bmad-method/bmm/workflows/3-solutioning/check-implementation-readiness/steps/step-01-document-discovery.md",
+    "outputFile": "",
+    "startedAt": "2026-03-15T23:31:00.408Z"
+  },
   "completedWorkflows": [
     {
       "id": "create-architecture",
@@ -32,13 +42,6 @@
       "agentName": "John",
       "completedAt": "2026-03-15T23:01:00.000Z",
       "outputFile": "_bmad-output/planning-artifacts/epics.md"
-    },
-    {
-      "id": "check-implementation-readiness",
-      "agentId": "architect",
-      "agentName": "Winston",
-      "completedAt": "2026-03-16T00:00:00.000Z",
-      "outputFile": "_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-15.md"
     }
   ]
 }

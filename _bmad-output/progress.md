@@ -8,8 +8,8 @@
 - Phase: 3
 - Current story: none
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Claude ACP completed `create-epics-and-stories`; artifact written to `_bmad-output/planning-artifacts/epics.md` and BMAD state now marks the workflow complete.
-- Next step: Commit & push epics/stories artifacts, then start workflow: check-implementation-readiness
+- Last action: Claude ACP completed `check-implementation-readiness`; repaired stale `_bmad/state.json` from generated readiness artifact and checkpointed the workflow as complete.
+- Next step: Commit & push readiness artifacts, then start workflow: sprint-planning
 
 ## Stories
 - Not generated yet
@@ -18,7 +18,9 @@
 - [x] project initialization
 - [x] create-product-brief (commit: ae6b332, output: planning-artifacts/product-brief-Linkboard-2026-03-15.md)
 - [x] create-prd (commit: fd8da93, output: planning-artifacts/prd.md)
-- [x] create-architecture (output: planning-artifacts/architecture.md)
+- [x] create-architecture (commit: 81d8872, output: planning-artifacts/architecture.md)
+- [x] create-epics-and-stories (commit: 6c2f0f1, output: planning-artifacts/epics.md)
+- [x] check-implementation-readiness (commit: pending, output: planning-artifacts/implementation-readiness-report-2026-03-15.md)
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
