@@ -6,16 +6,22 @@
 
 ## Current State
 - Phase: 4
-- Current story: 1.1 Project Initialization & Supabase Configuration
+- Current story: 1.2 Magic Link Authentication Flow
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Completed Story 1.1 dev-story and code-review; story and sprint status are both done.
-- Next step: Commit & push Story 1.1, then start story 1.2: Magic Link Authentication Flow via Phase 4 story loop
+- Last action: Heartbeat reconciled completed dev-story for Story 1.2 and started code-review in a Claude ACP session.
+- Next step: Poll ACP session agent:claude:acp:cd56a33b-389f-4684-b859-c17d12cdc9dc for code-review completion, then commit & push Story 1.2 and continue the Phase 4 story loop
 
 ## ACP Session
-- acp_session_key: agent:claude:acp:43fa5b6d-cbac-431c-9df6-6f9513e9fa07
-- acp_started_at: 2026-03-16T00:29:00Z
-- acp_workflow: sprint-planning
-- acp_status: completed
+- acp_session_key: agent:claude:acp:cd56a33b-389f-4684-b859-c17d12cdc9dc
+- acp_started_at: 2026-03-16T05:00:00Z
+- acp_workflow: code-review
+- acp_status: running
+
+## Subagent Session
+- subagent_session_key: agent:main:subagent:f32a5ba2-366c-44ee-af0b-f1513fe56f5e
+- subagent_started_at: 2026-03-16T04:00:00Z
+- subagent_workflow: dev-story
+- subagent_status: completed
 
 ## Stories
 - [x] Story 1.1: Project Initialization & Supabase Configuration
