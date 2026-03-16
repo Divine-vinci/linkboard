@@ -1,25 +1,18 @@
-# Execution Plan — Linkboard
+# Execution Plan — Story 1.4
 
 ## Goal
-Build Linkboard: a personal bookmark manager with URL saving, tags, automatic page metadata fetch, tag/keyword search, simple dashboard UI, Supabase magic-link auth, and Next.js deployment on Vercel.
+Implement Story 1.4 Landing Page in `/home/clawd/projects/linkboard`.
 
-## Stack
-- Next.js
-- Supabase Auth + Postgres
-- Vercel
-
-## BMAD Flow
-1. create-product-brief
-2. create-prd
-3. create-architecture
-4. create-epics-and-stories
-5. check-implementation-readiness
-6. sprint-planning
-7. Phase 4 story loop
-8. Stop and wait for /deploy
+## Scope
+1. Replace `app/page.tsx` placeholder with static RSC landing page.
+2. Add page-level metadata + Open Graph.
+3. Add `app/robots.ts` to allow `/` and disallow `/dashboard` + `/api`.
+4. Add Story 1.4 test coverage.
+5. Run `npm test`, `npm run typecheck`, `npm run lint`, `npm run build` and confirm `/` is static.
 
 ## Constraints
-- Keep UI simple
-- Favor fast MVP architecture
-- Search should work across tags, title, URL, and metadata text
-- Metadata fetch should handle title, description, favicon, and Open Graph image when available
+- No `'use client'`
+- No new deps
+- Tailwind utilities only
+- CTA => `/login`
+- Semantic HTML + visible focus states

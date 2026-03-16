@@ -44,7 +44,7 @@ development_status:
   1-1-project-initialization-and-supabase-configuration: done
   1-2-magic-link-authentication-flow: done
   1-3-route-protection-and-session-persistence: done
-  1-4-landing-page: backlog
+  1-4-landing-page: done
   epic-1-retrospective: optional
 
   epic-2: backlog

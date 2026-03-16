@@ -19,3 +19,13 @@
 - Added `tests/story-1-3.test.mjs` to lock route protection, session refresh cookie handling, dashboard server-side guard behavior, and presence of the Story 1.3 artifact.
 - Validation gates passed: `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`.
 - Build note: Next.js still emits the existing framework deprecation warning that `middleware.ts` will eventually move to `proxy.ts`; not a blocker for Story 1.3.
+
+
+
+## Story 1.4 — Landing Page
+- Implemented a static RSC landing page in `app/page.tsx` with hero, feature grid, semantic structure, visible focus states, and `/login` CTAs.
+- Added page-level metadata + Open Graph fields in `app/page.tsx` and `app/robots.ts` for crawler controls.
+- Added `tests/story-1-4.test.mjs` for AC1-AC2 coverage.
+- Validation gates passed: `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`.
+- Build verification: `/` rendered as static (`○ /`); `robots.txt` rendered as static (`○ /robots.txt`).
+- Build note: existing Next.js `middleware.ts` deprecation warning remains non-blocking.

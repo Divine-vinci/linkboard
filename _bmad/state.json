@@ -100,6 +100,25 @@
       "agentId": "dev",
       "outputFile": "",
       "completedAt": "2026-03-16T10:30:37.650Z"
+    },
+    {
+      "id": "create-story",
+      "agentId": "sm",
+      "agentName": "Bob",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/1-4-landing-page.md",
+      "completedAt": "2026-03-16T11:05:00.000Z"
+    },
+    {
+      "id": "dev-story",
+      "agentId": "dev",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/dev-story-log.md",
+      "completedAt": "2026-03-16T12:06:00.931Z"
+    },
+    {
+      "id": "code-review",
+      "agentId": "dev",
+      "outputFile": "",
+      "completedAt": "2026-03-16T13:00:35.529Z"
     }
   ]
 }

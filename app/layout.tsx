@@ -13,6 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://linkboard.app",
+  ),
   title: "Linkboard",
   description: "Save, tag, and find links without losing context.",
 };

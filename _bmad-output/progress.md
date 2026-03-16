@@ -6,28 +6,28 @@
 
 ## Current State
 - Phase: 4
-- Current story: 1.3 Route Protection & Session Persistence
+- Current story: 1.4 Landing Page
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Resumed from checkpoint on heartbeat, confirmed `npm test` and `npm run build` pass, booted local dev server on port 3001, and verified the landing page responds with HTTP 200 via curl. Browser QA could not use the browser tool because the gateway browser endpoint timed out.
-- Next step: Start workflow: code-review for Story 1.3
+- Last action: Reconciled completed `dev-story` for Story 1.4 from subagent `agent:main:subagent:e1e29588-404c-458b-b83b-8ddbfc54f15e`, then started `code-review` in Claude ACP session `agent:claude:acp:4e5b29b9-96dd-41d0-9237-aec5fc303f98`.
+- Next step: Poll ACP session agent:claude:acp:4e5b29b9-96dd-41d0-9237-aec5fc303f98 for code-review completion on Story 1.4 Landing Page
 
 ## ACP Session
-- acp_session_key: agent:claude:acp:d3a49c76-c450-4219-a8d7-53e8f0f6deb1
-- acp_started_at: 2026-03-16T09:36:00Z
-- acp_workflow: code-review
+- acp_session_key: agent:claude:acp:bb92711f-4d79-4641-83c7-e43e565baa48
+- acp_started_at: 2026-03-16T11:00:00Z
+- acp_workflow: create-story
 - acp_status: completed
 
 ## Subagent Session
-- subagent_session_key: none
-- subagent_started_at: n/a
-- subagent_workflow: none
-- subagent_status: idle
+- subagent_session_key: agent:main:subagent:e1e29588-404c-458b-b83b-8ddbfc54f15e
+- subagent_started_at: 2026-03-16T12:01:27Z
+- subagent_workflow: dev-story
+- subagent_status: running
 
 ## Stories
 - [x] Story 1.1: Project Initialization & Supabase Configuration
 - [ ] Story 1.2: Magic Link Authentication Flow
 - [ ] Story 1.3: Route Protection & Session Persistence
-- [ ] Story 1.4: Landing Page
+- [ ] Story 1.4: Landing Page (dev complete; awaiting code-review)
 - [ ] Story 2.1: Save Bookmark with Metadata Fetching
 - [ ] Story 2.2: Bookmark Dashboard & Card Display
 - [ ] Story 2.3: Edit Bookmark
