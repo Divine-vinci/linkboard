@@ -12,3 +12,16 @@
 - AC4: Implemented `lib/actions/bookmarks.ts` and `lib/validators/bookmark.ts` using `ActionResult<T>`, authenticated Supabase inserts, and descending bookmark listing.
 - Tests: added `tests/story-2-1.test.mjs`; validation passed via `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`.
 - Non-blocking note: build still emits existing Next.js `middleware.ts` deprecation warning.
+
+
+## 2026-03-16T20:30:35Z — Workflow Finalization
+- Workflow: `dev-story`
+- State: final step loaded via `bmad_load_step`
+- Result: no pending implementation instructions in BMAD state; finalized current workflow instance.
+
+
+## 2026-03-16 — Story 2.2 complete
+- Story: `2-2-bookmark-dashboard-and-card-display.md`
+- Status: `review`
+- Sprint status: `review`
+- Validation: `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`

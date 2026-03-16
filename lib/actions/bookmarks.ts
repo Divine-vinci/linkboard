@@ -1,8 +1,27 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import type { ActionResult, Bookmark } from "@/lib/types";
+import type { ActionResult, Bookmark, BookmarkWithTags, Tag } from "@/lib/types";
 import { bookmarkCreateSchema, type BookmarkCreateInput } from "@/lib/validators/bookmark";
+
+type BookmarkRowWithTags = Bookmark & {
+  bookmark_tags?: Array<{
+    tags: Tag | null;
+  }>;
+};
+
+function flattenBookmarkTags(bookmark: BookmarkRowWithTags): BookmarkWithTags {
+  const { bookmark_tags, ...bookmarkFields } = bookmark;
+
+  if (!Array.isArray(bookmark_tags)) {
+    return { ...bookmarkFields, tags: [] };
+  }
+
+  return {
+    ...bookmarkFields,
+    tags: bookmark_tags.flatMap((bookmarkTag) => (bookmarkTag.tags ? [bookmarkTag.tags] : [])),
+  };
+}
 
 export async function createBookmark(
   input: BookmarkCreateInput,
@@ -69,7 +88,7 @@ export async function createBookmark(
   }
 }
 
-export async function listBookmarks(): Promise<ActionResult<Bookmark[]>> {
+export async function listBookmarks(): Promise<ActionResult<BookmarkWithTags[]>> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -88,7 +107,7 @@ export async function listBookmarks(): Promise<ActionResult<Bookmark[]>> {
   try {
     const { data, error } = await supabase
       .from("bookmarks")
-      .select("*")
+      .select("*, bookmark_tags(tags(*))")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -103,7 +122,7 @@ export async function listBookmarks(): Promise<ActionResult<Bookmark[]>> {
 
     return {
       success: true,
-      data: (data ?? []) as Bookmark[],
+      data: (data ?? []).map((bookmark) => flattenBookmarkTags(bookmark as BookmarkRowWithTags)),
     };
   } catch {
     return {

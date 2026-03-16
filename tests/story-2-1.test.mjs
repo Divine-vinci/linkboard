@@ -356,6 +356,6 @@ test("AC1 listBookmarks returns Supabase rows and requests newest-first ordering
   });
   assert.deepEqual(result, {
     success: true,
-    data: rows,
+    data: rows.map((r) => ({ ...r, tags: [] })),
   });
 });
