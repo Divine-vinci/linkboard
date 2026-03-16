@@ -6,22 +6,22 @@
 
 ## Current State
 - Phase: 4
-- Current story: 1.2 Magic Link Authentication Flow
+- Current story: 1.3 Route Protection & Session Persistence
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Heartbeat reconciled completed dev-story for Story 1.2 and started code-review in a Claude ACP session.
-- Next step: Poll ACP session agent:claude:acp:cd56a33b-389f-4684-b859-c17d12cdc9dc for code-review completion, then commit & push Story 1.2 and continue the Phase 4 story loop
+- Last action: Resumed from checkpoint on heartbeat, confirmed `npm test` and `npm run build` pass, booted local dev server on port 3001, and verified the landing page responds with HTTP 200 via curl. Browser QA could not use the browser tool because the gateway browser endpoint timed out.
+- Next step: Start workflow: code-review for Story 1.3
 
 ## ACP Session
-- acp_session_key: agent:claude:acp:cd56a33b-389f-4684-b859-c17d12cdc9dc
-- acp_started_at: 2026-03-16T05:00:00Z
+- acp_session_key: agent:claude:acp:d3a49c76-c450-4219-a8d7-53e8f0f6deb1
+- acp_started_at: 2026-03-16T09:36:00Z
 - acp_workflow: code-review
 - acp_status: running
 
 ## Subagent Session
-- subagent_session_key: agent:main:subagent:f32a5ba2-366c-44ee-af0b-f1513fe56f5e
-- subagent_started_at: 2026-03-16T04:00:00Z
-- subagent_workflow: dev-story
-- subagent_status: completed
+- subagent_session_key: none
+- subagent_started_at: n/a
+- subagent_workflow: none
+- subagent_status: idle
 
 ## Stories
 - [x] Story 1.1: Project Initialization & Supabase Configuration
@@ -51,3 +51,4 @@
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
 - BMAD local state was stale earlier; repaired and now aligned through create-story.
+-story.
