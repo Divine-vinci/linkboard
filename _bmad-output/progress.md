@@ -15,7 +15,7 @@
 - acp_session_key: agent:claude:acp:d3a49c76-c450-4219-a8d7-53e8f0f6deb1
 - acp_started_at: 2026-03-16T09:36:00Z
 - acp_workflow: code-review
-- acp_status: running
+- acp_status: completed
 
 ## Subagent Session
 - subagent_session_key: none
