@@ -27,7 +27,7 @@
 - [x] Story 1.1: Project Initialization & Supabase Configuration
 - [ ] Story 1.2: Magic Link Authentication Flow
 - [ ] Story 1.3: Route Protection & Session Persistence
-- [ ] Story 1.4: Landing Page (dev complete; awaiting code-review)
+- [x] Story 1.4: Landing Page (commit: c64cea1)
 - [ ] Story 2.1: Save Bookmark with Metadata Fetching
 - [ ] Story 2.2: Bookmark Dashboard & Card Display
 - [ ] Story 2.3: Edit Bookmark
@@ -47,6 +47,12 @@
 - [x] create-story — Story 1.1 (output: implementation-artifacts/1-1-project-initialization-and-supabase-configuration.md)
 - [x] dev-story — Story 1.1 (commit: pending, output: implementation-artifacts/dev-story-log.md)
 - [x] code-review — Story 1.1 (commit: pending, output: implementation-artifacts/1-1-project-initialization-and-supabase-configuration.md)
+
+## Blockers
+- Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
+- BMAD local state was stale earlier; repaired and now aligned through create-story.
+-story.
+ output: implementation-artifacts/1-4-landing-page.md)
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
