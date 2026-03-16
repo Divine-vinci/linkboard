@@ -119,6 +119,37 @@
       "agentId": "dev",
       "outputFile": "",
       "completedAt": "2026-03-16T13:00:35.529Z"
+    },
+    {
+      "id": "create-story",
+      "agentId": "sm",
+      "outputFile": "",
+      "completedAt": "2026-03-16T14:01:14.950Z"
+    },
+    {
+      "id": "create-story",
+      "agentId": "sm",
+      "agentName": "Bob",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/2-1-save-bookmark-with-metadata-fetching.md",
+      "completedAt": "2026-03-16T14:05:00.000Z"
+    },
+    {
+      "id": "dev-story",
+      "agentId": "dev",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/dev-story-log.md",
+      "completedAt": "2026-03-16T15:34:27.170Z"
+    },
+    {
+      "id": "code-review",
+      "agentId": "dev",
+      "outputFile": "",
+      "completedAt": "2026-03-16T19:00:46.307Z"
+    },
+    {
+      "id": "code-review",
+      "agentId": "dev",
+      "outputFile": "",
+      "completedAt": "2026-03-16T20:00:46.645Z"
     }
   ]
 }

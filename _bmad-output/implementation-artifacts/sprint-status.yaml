@@ -47,8 +47,8 @@ development_status:
   1-4-landing-page: done
   epic-1-retrospective: optional
 
-  epic-2: backlog
-  2-1-save-bookmark-with-metadata-fetching: backlog
+  epic-2: in-progress
+  2-1-save-bookmark-with-metadata-fetching: done
   2-2-bookmark-dashboard-and-card-display: backlog
   2-3-edit-bookmark: backlog
   2-4-delete-bookmark: backlog

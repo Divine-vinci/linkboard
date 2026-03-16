@@ -1,10 +1,28 @@
-export default function DashboardPage() {
+import { BookmarkForm } from "@/components/bookmark-form";
+import { BookmarkList } from "@/components/bookmark-list";
+import { listBookmarks } from "@/lib/actions/bookmarks";
+
+export default async function DashboardPage() {
+  const bookmarksResult = await listBookmarks();
+  const bookmarks = bookmarksResult.success ? bookmarksResult.data : [];
+
   return (
-    <section className="space-y-3">
-      <h1 className="text-3xl font-semibold tracking-tight">Your bookmarks</h1>
-      <p className="text-base leading-7 text-muted-foreground">
-        Authentication is wired. Bookmark creation ships in the next story.
-      </p>
+    <section className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-semibold tracking-tight">Your bookmarks</h1>
+        <p className="text-base leading-7 text-muted-foreground">
+          Save a link once. Linkboard will fetch the page metadata and keep it searchable.
+        </p>
+      </div>
+
+      <BookmarkForm />
+      {!bookmarksResult.success ? (
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-5 text-sm text-rose-700">
+          {bookmarksResult.error.message}
+        </div>
+      ) : (
+        <BookmarkList bookmarks={bookmarks} />
+      )}
     </section>
   );
 }
