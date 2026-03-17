@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { deleteBookmark } from "@/lib/actions/bookmarks";
 import { BookmarkCard } from "@/components/bookmark-card";
-import type { BookmarkWithTags } from "@/lib/types";
+import { TagFilter } from "@/components/tag-filter";
+import { deleteBookmark } from "@/lib/actions/bookmarks";
+import type { BookmarkWithTags, Tag } from "@/lib/types";
 
 type BookmarkListProps = {
   bookmarks: BookmarkWithTags[];
@@ -12,11 +13,36 @@ type BookmarkListProps = {
 
 export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkListProps>) {
   const [bookmarks, setBookmarks] = useState(initialBookmarks);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
     setBookmarks(initialBookmarks);
   }, [initialBookmarks]);
+
+  const availableTags = useMemo(() => {
+    const tagMap = new Map<string, Tag>();
+
+    for (const bookmark of bookmarks) {
+      for (const tag of bookmark.tags) {
+        if (!tagMap.has(tag.name)) {
+          tagMap.set(tag.name, tag);
+        }
+      }
+    }
+
+    return Array.from(tagMap.values()).sort((left, right) => left.name.localeCompare(right.name));
+  }, [bookmarks]);
+
+  const displayedBookmarks = selectedTag
+    ? bookmarks.filter((bookmark) => bookmark.tags.some((tag) => tag.name === selectedTag))
+    : bookmarks;
+
+  useEffect(() => {
+    if (selectedTag && !availableTags.some((tag) => tag.name === selectedTag)) {
+      setSelectedTag(null);
+    }
+  }, [availableTags, selectedTag]);
 
   function handleBookmarkUpdate(updatedBookmark: BookmarkWithTags) {
     setDeleteError(null);
@@ -84,6 +110,8 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
     );
   }
 
+  const hasActiveFilter = selectedTag !== null;
+
   return (
     <div className="space-y-4">
       {deleteError ? (
@@ -91,21 +119,40 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
           {deleteError}
         </p>
       ) : null}
-      <div
-        aria-label="Saved bookmarks"
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        role="list"
-      >
-        {bookmarks.map((bookmark) => (
-          <BookmarkCard
-            bookmark={bookmark}
-            deleteError={deleteError}
-            key={bookmark.id}
-            onBookmarkDelete={handleBookmarkDelete}
-            onBookmarkUpdate={handleBookmarkUpdate}
-          />
-        ))}
-      </div>
+
+      {availableTags.length > 0 ? (
+        <TagFilter onTagSelect={setSelectedTag} selectedTag={selectedTag} tags={availableTags} />
+      ) : null}
+
+      {displayedBookmarks.length === 0 && hasActiveFilter ? (
+        <div className="flex min-h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/60 p-8 text-center">
+          <h2 className="text-lg font-semibold text-slate-900">No bookmarks tagged with &quot;{selectedTag}&quot;</h2>
+          <p className="mt-2 text-sm text-slate-500">Try another tag or clear the current filter.</p>
+          <button
+            className="mt-4 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+            onClick={() => setSelectedTag(null)}
+            type="button"
+          >
+            Clear filter
+          </button>
+        </div>
+      ) : (
+        <div
+          aria-label="Saved bookmarks"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          role="list"
+        >
+          {displayedBookmarks.map((bookmark) => (
+            <BookmarkCard
+              bookmark={bookmark}
+              deleteError={deleteError}
+              key={bookmark.id}
+              onBookmarkDelete={handleBookmarkDelete}
+              onBookmarkUpdate={handleBookmarkUpdate}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

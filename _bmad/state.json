@@ -3,7 +3,17 @@
   "projectPath": "/home/clawd/projects/linkboard",
   "createdAt": "2026-03-15T21:53:08.129Z",
   "currentPhase": "implementation",
-  "activeWorkflow": null,
+  "activeWorkflow": {
+    "id": "code-review",
+    "agentId": "dev",
+    "agentName": "Amelia",
+    "mode": "yolo",
+    "currentStep": 1,
+    "totalSteps": null,
+    "currentStepFile": "/home/clawd/.openclaw/extensions/bmad-method/bmad-method/bmm/workflows/4-implementation/code-review/workflow.yaml",
+    "outputFile": "",
+    "startedAt": "2026-03-17T10:09:45.261Z"
+  },
   "completedWorkflows": [
     {
       "id": "create-architecture",
@@ -222,6 +232,18 @@
       "agentId": "dev",
       "outputFile": "",
       "completedAt": "2026-03-17T10:00:51.978Z"
+    },
+    {
+      "id": "create-story",
+      "agentId": "sm",
+      "outputFile": "",
+      "completedAt": "2026-03-17T10:06:08.873Z"
+    },
+    {
+      "id": "dev-story",
+      "agentId": "dev",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/dev-story-log.md",
+      "completedAt": "2026-03-17T10:09:16.771Z"
     }
   ]
 }

@@ -56,7 +56,7 @@ development_status:
 
   epic-3: in-progress
   3-1-tag-creation-and-assignment: done
-  3-2-tag-listing-and-filtering: backlog
+  3-2-tag-listing-and-filtering: review
   epic-3-retrospective: optional
 
   epic-4: backlog

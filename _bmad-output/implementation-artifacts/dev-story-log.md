@@ -54,3 +54,11 @@
 - Files to create: `lib/validators/tag.ts`, `lib/actions/tags.ts`, `components/tag-input.tsx`
 - Files to modify: `bookmark-form.tsx`, `bookmark-edit-form.tsx`, `bookmark-list.tsx`
 - No new migrations needed — tags, bookmark_tags, RLS already exist
+
+
+## Story 3.2 — Tag Listing & Filtering
+- Story file: `_bmad-output/implementation-artifacts/3-2-tag-listing-and-filtering.md`
+- Status: `review`
+- Implemented `components/tag-filter.tsx` and integrated client-side filtering/orphan-tag clearing in `components/bookmark-list.tsx`.
+- Added regression coverage in `tests/story-3-2.test.mjs`.
+- Validation: `node --test tests/story-3-2.test.mjs`, `npm test` (40/40), `npm run typecheck`, `npm run lint`, `npm run build`.

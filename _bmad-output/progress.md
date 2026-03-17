@@ -6,16 +6,22 @@
 
 ## Current State
 - Phase: 4
-- Current story: 3.1 Tag Creation & Assignment
+- Current story: 3.2 Tag Listing & Filtering
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Heartbeat polled subagent session `agent:main:subagent:1948e915-4a64-445d-9665-f27d06c60c59`, confirmed Story 3.1 dev-story completed, resumed stalled `code-review`, and spawned ACP session `agent:claude:acp:24d28701-3f6d-4b13-a7a7-b5c415698099`.
-- Next step: Poll ACP session agent:claude:acp:24d28701-3f6d-4b13-a7a7-b5c415698099 for code-review completion
+- Last action: Story 3.2 `dev-story` completed successfully; implementation, tests, typecheck, lint, and build all passed, and the story is now in `review`.
+- Next step: Start workflow: code-review
 
 ## ACP Session
 - acp_session_key: agent:claude:acp:6c59364d-a77f-4163-9ef9-8d4c94807c74
 - acp_started_at: 2026-03-17T07:20:46Z
 - acp_workflow: code-review
 - acp_status: stalled-no-output (fallback review completed locally)
+
+## Active Dev Session
+- subagent_session_key: agent:main:subagent:23bccaa4-04a0-45ab-9b6d-4200ea13ddec
+- subagent_started_at: 2026-03-17T10:07:00Z
+- subagent_workflow: dev-story
+- subagent_status: completed
 
 ## Previous ACP Session
 - acp_session_key: agent:claude:acp:8c157bb6-9df1-4fa7-8212-f85f4c416f1d
@@ -67,4 +73,5 @@
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
+- 2026-03-17 10:04 UTC heartbeat: ACP session `agent:claude:acp:ab61c4a2-d9ab-4846-b73e-3d5c8a2b0f33` returned no transcript output and did not respond to a recovery nudge within 30s; treat as stalled until output appears or workflow is restarted.
 /task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
