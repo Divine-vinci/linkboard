@@ -6,10 +6,10 @@
 
 ## Current State
 - Phase: 4
-- Current story: 2.4 Delete Bookmark
+- Current story: 3.1 Tag Creation & Assignment
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Implemented Story 2.4 Delete Bookmark locally and verified with `npm test && npm run typecheck && npm run lint && npm run build`.
-- Next step: Commit & push Story 2.4 Delete Bookmark, record the commit hash, then start Story 3.1 via the Phase 4 loop
+- Last action: Completed Story 2.4 Delete Bookmark, committed and pushed `[BMAD Phase 4] Story 2.4: Delete Bookmark` (`03fe81d`).
+- Next step: Start story 3.1: Tag Creation & Assignment via the Phase 4 loop
 
 ## ACP Session
 - acp_session_key: agent:claude:acp:6c59364d-a77f-4163-9ef9-8d4c94807c74
@@ -37,7 +37,7 @@
 - [x] Story 2.1: Save Bookmark with Metadata Fetching (commit: c8a46da)
 - [x] Story 2.2: Bookmark Dashboard & Card Display (commit: 439d080)
 - [x] Story 2.3: Edit Bookmark
-- [ ] Story 2.4: Delete Bookmark
+- [x] Story 2.4: Delete Bookmark (commit: 03fe81d)
 - [ ] Story 3.1: Tag Creation & Assignment
 - [ ] Story 3.2: Tag Listing & Filtering
 - [ ] Story 4.1: Full-Text Search
@@ -61,6 +61,7 @@
 - [x] create-story — Story 2.3
 - [x] dev-story — Story 2.3
 - [x] code-review — Story 2.3
+- [x] Story 2.4 loop complete (commit: 03fe81d)
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
