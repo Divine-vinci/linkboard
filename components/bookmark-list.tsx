@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { BookmarkCard } from "@/components/bookmark-card";
+import { SearchInput } from "@/components/search-input";
 import { TagFilter } from "@/components/tag-filter";
-import { deleteBookmark } from "@/lib/actions/bookmarks";
+import { deleteBookmark, searchBookmarks } from "@/lib/actions/bookmarks";
 import type { BookmarkWithTags, Tag } from "@/lib/types";
 
 type BookmarkListProps = {
@@ -15,6 +16,10 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
   const [bookmarks, setBookmarks] = useState(initialBookmarks);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<BookmarkWithTags[] | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   useEffect(() => {
     setBookmarks(initialBookmarks);
@@ -34,15 +39,47 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
     return Array.from(tagMap.values()).sort((left, right) => left.name.localeCompare(right.name));
   }, [bookmarks]);
 
-  const displayedBookmarks = selectedTag
-    ? bookmarks.filter((bookmark) => bookmark.tags.some((tag) => tag.name === selectedTag))
-    : bookmarks;
+  const isSearchActive = searchQuery.length > 0;
+  const sourceBookmarks = isSearchActive && searchResults !== null ? searchResults : bookmarks;
+
+  const displayedBookmarks = useMemo(
+    () =>
+      selectedTag
+        ? sourceBookmarks.filter((bookmark) => bookmark.tags.some((tag) => tag.name === selectedTag))
+        : sourceBookmarks,
+    [sourceBookmarks, selectedTag],
+  );
 
   useEffect(() => {
     if (selectedTag && !availableTags.some((tag) => tag.name === selectedTag)) {
       setSelectedTag(null);
     }
   }, [availableTags, selectedTag]);
+
+  const handleSearch = useCallback(async (query: string) => {
+    setSearchQuery(query);
+    setSearchError(null);
+
+    if (!query) {
+      setSearchResults(null);
+      return;
+    }
+
+    setIsSearching(true);
+
+    try {
+      const result = await searchBookmarks(query);
+
+      if (result.success) {
+        setSearchResults(result.data);
+      } else {
+        setSearchError(result.error.message);
+        setSearchResults(null);
+      }
+    } finally {
+      setIsSearching(false);
+    }
+  }, []);
 
   function handleBookmarkUpdate(updatedBookmark: BookmarkWithTags) {
     setDeleteError(null);
@@ -51,6 +88,13 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
         bookmark.id === updatedBookmark.id ? updatedBookmark : bookmark,
       ),
     );
+    if (searchResults) {
+      setSearchResults((current) =>
+        current?.map((bookmark) =>
+          bookmark.id === updatedBookmark.id ? updatedBookmark : bookmark,
+        ) ?? null,
+      );
+    }
   }
 
   async function handleBookmarkDelete(bookmarkId: string) {
@@ -69,6 +113,12 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
 
       return currentBookmarks.filter((bookmark) => bookmark.id !== bookmarkId);
     });
+
+    if (searchResults) {
+      setSearchResults((current) =>
+        current?.filter((bookmark) => bookmark.id !== bookmarkId) ?? null,
+      );
+    }
 
     if (!removedBookmark) {
       return;
@@ -110,7 +160,7 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
     );
   }
 
-  const hasActiveFilter = selectedTag !== null;
+  const hasActiveFilter = selectedTag !== null || isSearchActive;
 
   return (
     <div className="space-y-4">
@@ -120,25 +170,43 @@ export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkL
         </p>
       ) : null}
 
+      {searchError ? (
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
+          {searchError}
+        </p>
+      ) : null}
+
+      <SearchInput isSearching={isSearching} onSearch={handleSearch} />
+
       {availableTags.length > 0 ? (
         <TagFilter onTagSelect={setSelectedTag} selectedTag={selectedTag} tags={availableTags} />
       ) : null}
 
       {displayedBookmarks.length === 0 && hasActiveFilter ? (
         <div className="flex min-h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/60 p-8 text-center">
-          <h2 className="text-lg font-semibold text-slate-900">No bookmarks tagged with &quot;{selectedTag}&quot;</h2>
-          <p className="mt-2 text-sm text-slate-500">Try another tag or clear the current filter.</p>
-          <button
-            className="mt-4 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
-            onClick={() => setSelectedTag(null)}
-            type="button"
-          >
-            Clear filter
-          </button>
+          <h2 className="text-lg font-semibold text-slate-900">
+            {isSearchActive
+              ? `No results for "${searchQuery}"`
+              : `No bookmarks tagged with "${selectedTag}"`}
+          </h2>
+          <p className="mt-2 text-sm text-slate-500">
+            {isSearchActive
+              ? "Try a different search term."
+              : "Try another tag or clear the current filter."}
+          </p>
+          {selectedTag ? (
+            <button
+              className="mt-4 cursor-pointer rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+              onClick={() => setSelectedTag(null)}
+              type="button"
+            >
+              Clear filter
+            </button>
+          ) : null}
         </div>
       ) : (
         <div
-          aria-label="Saved bookmarks"
+          aria-label={isSearchActive ? "Search results" : "Saved bookmarks"}
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           role="list"
         >

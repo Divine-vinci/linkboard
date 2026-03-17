@@ -31,5 +31,12 @@ export const bookmarkUpdateSchema = z.object({
   description: z.string().max(2000, "Description must be 2000 characters or fewer").nullable().optional(),
 });
 
+export const searchQuerySchema = z
+  .string()
+  .trim()
+  .min(1, "Enter a search query")
+  .max(200, "Search query must be 200 characters or fewer");
+
 export type BookmarkCreateInput = z.infer<typeof bookmarkCreateSchema>;
 export type BookmarkUpdateInput = z.infer<typeof bookmarkUpdateSchema>;
+export type SearchQueryInput = z.infer<typeof searchQuerySchema>;

@@ -10,7 +10,7 @@ type TagFilterProps = {
 
 function getButtonClassName(isActive: boolean) {
   return [
-    "rounded-full px-2 py-1 text-xs transition focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-1 focus-visible:outline-none",
+    "cursor-pointer rounded-full px-2 py-1 text-xs transition focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-1 focus-visible:outline-none",
     isActive
       ? "bg-slate-700 text-white"
       : "bg-slate-100 text-slate-600 hover:bg-slate-200",

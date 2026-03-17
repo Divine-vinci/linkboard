@@ -6,12 +6,18 @@
 
 ## Current State
 - Phase: 4
-- Current story: 3.2 Tag Listing & Filtering
+- Current story: 4.1 Full-Text Search (DONE)
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Story 3.2 `dev-story` completed successfully; implementation, tests, typecheck, lint, and build all passed, and the story is now in `review`.
-- Next step: Start workflow: code-review
+- Last action: Story 4.1 implemented — searchBookmarks RPC, SearchInput component, BookmarkList integration. Migration 006 applied to Supabase. All env vars configured. Typecheck, lint, build, 40/40 tests pass.
+- Next step: Phase 4 complete — all stories done. Ready for deployment review.
 
 ## ACP Session
+- acp_session_key: agent:claude:acp:39cfef29-793a-425f-869e-6650036667fc
+- acp_started_at: 2026-03-17T10:10:00Z
+- acp_workflow: code-review
+- acp_status: running
+
+## Previous ACP Session
 - acp_session_key: agent:claude:acp:6c59364d-a77f-4163-9ef9-8d4c94807c74
 - acp_started_at: 2026-03-17T07:20:46Z
 - acp_workflow: code-review
@@ -44,9 +50,9 @@
 - [x] Story 2.2: Bookmark Dashboard & Card Display (commit: 439d080)
 - [x] Story 2.3: Edit Bookmark
 - [x] Story 2.4: Delete Bookmark (commit: 03fe81d)
-- [ ] Story 3.1: Tag Creation & Assignment
-- [ ] Story 3.2: Tag Listing & Filtering
-- [ ] Story 4.1: Full-Text Search
+- [x] Story 3.1: Tag Creation & Assignment (commit: 6a316fe)
+- [x] Story 3.2: Tag Listing & Filtering (commit: b5d1fea)
+- [x] Story 4.1: Full-Text Search
 
 ## Completed Workflows
 - [x] project initialization
@@ -70,6 +76,13 @@
 - [x] Story 2.4 loop complete (commit: 03fe81d)
 - [x] create-story — Story 3.1
 - [x] dev-story — Story 3.1
+- [x] code-review — Story 3.1
+- [x] create-story — Story 3.2
+- [x] dev-story — Story 3.2 (commit: b5d1fea)
+- [x] code-review — Story 3.2 (inline during heartbeat recovery)
+- [x] create-story — Story 4.1
+- [x] dev-story — Story 4.1
+- [x] code-review — Story 4.1 (inline during heartbeat recovery)
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.

@@ -5,6 +5,7 @@ import type { ActionResult, Bookmark, BookmarkWithTags, Tag } from "@/lib/types"
 import {
   bookmarkCreateSchema,
   bookmarkUpdateSchema,
+  searchQuerySchema,
   type BookmarkCreateInput,
   type BookmarkUpdateInput,
 } from "@/lib/validators/bookmark";
@@ -283,6 +284,96 @@ export async function listBookmarks(): Promise<ActionResult<BookmarkWithTags[]>>
       error: {
         code: "BOOKMARK_LIST_FAILED",
         message: "We couldn’t load your bookmarks. Try refreshing.",
+      },
+    };
+  }
+}
+
+export async function searchBookmarks(
+  query: string,
+): Promise<ActionResult<BookmarkWithTags[]>> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      success: false,
+      error: {
+        code: "AUTH_NOT_AUTHENTICATED",
+        message: "You must be signed in to search bookmarks.",
+      },
+    };
+  }
+
+  const parsed = searchQuerySchema.safeParse(query);
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: parsed.error.issues[0]?.message ?? "Enter a valid search query.",
+      },
+    };
+  }
+
+  try {
+    const { data: searchResults, error: searchError } = await supabase.rpc(
+      "search_bookmarks",
+      { search_query: parsed.data },
+    );
+
+    if (searchError) {
+      return {
+        success: false,
+        error: {
+          code: "SEARCH_FAILED",
+          message: "Search failed. Try again.",
+        },
+      };
+    }
+
+    if (!searchResults || searchResults.length === 0) {
+      return { success: true, data: [] };
+    }
+
+    const rankedIds: string[] = searchResults.map(
+      (row: { bookmark_id: string }) => row.bookmark_id,
+    );
+
+    const { data, error } = await supabase
+      .from("bookmarks")
+      .select("*, bookmark_tags(tags(*))")
+      .in("id", rankedIds);
+
+    if (error) {
+      return {
+        success: false,
+        error: {
+          code: "SEARCH_FAILED",
+          message: "Search failed. Try again.",
+        },
+      };
+    }
+
+    const bookmarks = (data ?? []).map((bookmark) =>
+      flattenBookmarkTags(bookmark as BookmarkRowWithTags),
+    );
+
+    const idOrder = new Map(rankedIds.map((id, index) => [id, index]));
+    bookmarks.sort(
+      (a, b) => (idOrder.get(a.id) ?? 0) - (idOrder.get(b.id) ?? 0),
+    );
+
+    return { success: true, data: bookmarks };
+  } catch {
+    return {
+      success: false,
+      error: {
+        code: "SEARCH_FAILED",
+        message: "Search failed. Try again.",
       },
     };
   }

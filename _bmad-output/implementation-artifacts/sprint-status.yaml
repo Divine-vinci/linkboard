@@ -40,25 +40,25 @@ tracking_system: file-system
 story_location: /home/clawd/projects/linkboard/_bmad-output/implementation-artifacts
 
 development_status:
-  epic-1: in-progress
+  epic-1: done
   1-1-project-initialization-and-supabase-configuration: done
   1-2-magic-link-authentication-flow: done
   1-3-route-protection-and-session-persistence: done
   1-4-landing-page: done
   epic-1-retrospective: optional
 
-  epic-2: in-progress
+  epic-2: done
   2-1-save-bookmark-with-metadata-fetching: done
   2-2-bookmark-dashboard-and-card-display: done
   2-3-edit-bookmark: done
   2-4-delete-bookmark: done
   epic-2-retrospective: optional
 
-  epic-3: in-progress
+  epic-3: done
   3-1-tag-creation-and-assignment: done
-  3-2-tag-listing-and-filtering: review
+  3-2-tag-listing-and-filtering: done
   epic-3-retrospective: optional
 
-  epic-4: backlog
-  4-1-full-text-search: backlog
+  epic-4: done
+  4-1-full-text-search: done
   epic-4-retrospective: optional

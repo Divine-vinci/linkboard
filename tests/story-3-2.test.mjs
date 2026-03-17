@@ -27,7 +27,7 @@ test("AC2-AC3 BookmarkList derives available tags, filters bookmarks, and clears
 
   assert.ok(src.includes("useMemo"), "BookmarkList must memoize derived tags");
   assert.ok(src.includes("selectedTag"), "BookmarkList must keep selectedTag state");
-  assert.ok(src.includes("bookmarks.filter"), "BookmarkList must filter bookmarks client-side");
+  assert.ok(src.includes(".filter((bookmark) => bookmark.tags.some"), "BookmarkList must filter bookmarks client-side");
   assert.ok(src.includes("bookmark.tags.some"), "BookmarkList filter must match bookmark tags");
   assert.ok(src.includes("new Map<string, Tag>()"), "BookmarkList must dedupe tags by name");
   assert.ok(src.includes("localeCompare"), "BookmarkList must preserve deterministic tag ordering");
