@@ -1,6 +1,6 @@
 # Story 3.2: Tag Listing & Filtering
 
-Status: review
+Status: done
 
 ## Story
 
@@ -384,3 +384,4 @@ openai/gpt-5.4
 ### Change Log
 
 - 2026-03-17: Implemented Story 3.2 tag listing/filtering UI, bookmark filtering state, orphan-tag cleanup, and regression coverage.
+- 2026-03-17: Code review (claude-opus-4-6). Fixed: H1 — memoized `displayedBookmarks` with `useMemo` for NFR6 perf compliance; M4 — added `cursor-pointer` to tag filter buttons and clear filter button. Noted but not fixed: M1 — tests are source-code string searches, not behavioral tests; M2 — dual DOM trees for responsive layout (standard Tailwind pattern); M3 — wasted computation before early return on empty bookmarks (negligible impact).

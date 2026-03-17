@@ -9,7 +9,7 @@
 - Current story: 4.1 Full-Text Search (DONE)
 - Working directory: /home/clawd/projects/linkboard
 - Last action: Story 4.1 implemented — searchBookmarks RPC, SearchInput component, BookmarkList integration. Migration 006 applied to Supabase. All env vars configured. Typecheck, lint, build, 40/40 tests pass.
-- Next step: Phase 4 complete — all stories done. Ready for deployment review.
+- Next step: Wait for /deploy
 
 ## ACP Session
 - acp_session_key: agent:claude:acp:39cfef29-793a-425f-869e-6650036667fc
