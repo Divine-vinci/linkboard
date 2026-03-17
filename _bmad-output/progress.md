@@ -8,14 +8,14 @@
 - Phase: 4
 - Current story: 2.3 Edit Bookmark
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Heartbeat resumed stalled Story 2.2 code-review, confirmed ACP session `agent:claude:acp:8b3444bc-123a-42ad-95f3-c802abd59b35` had already completed, ran test/lint/build successfully, finalized the Story 2.2 loop, and pushed commit `439d080`.
-- Next step: Start story 2.3: Edit Bookmark via the Phase 4 story loop
+- Last action: Completed Story 2.3 code-review via fallback review path, fixed remaining review issues, synced story + sprint artifacts, and re-verified `npm test`, `npm run typecheck`, `npm run lint`, and `npm run build` successfully.
+- Next step: Commit & push Story 2.3, then start story 2.4: Delete Bookmark via Phase 4 story loop
 
 ## ACP Session
-- acp_session_key: agent:claude:acp:8b3444bc-123a-42ad-95f3-c802abd59b35
-- acp_started_at: 2026-03-16T22:30:00Z
+- acp_session_key: agent:claude:acp:6c59364d-a77f-4163-9ef9-8d4c94807c74
+- acp_started_at: 2026-03-17T07:20:46Z
 - acp_workflow: code-review
-- acp_status: completed
+- acp_status: stalled-no-output (fallback review completed locally)
 
 ## Previous ACP Session
 - acp_session_key: agent:claude:acp:8c157bb6-9df1-4fa7-8212-f85f4c416f1d
@@ -36,7 +36,7 @@
 - [x] Story 1.4: Landing Page (commit: aaacddf)
 - [x] Story 2.1: Save Bookmark with Metadata Fetching (commit: c8a46da)
 - [x] Story 2.2: Bookmark Dashboard & Card Display (commit: 439d080)
-- [ ] Story 2.3: Edit Bookmark
+- [x] Story 2.3: Edit Bookmark
 - [ ] Story 2.4: Delete Bookmark
 - [ ] Story 3.1: Tag Creation & Assignment
 - [ ] Story 3.2: Tag Listing & Filtering
@@ -58,6 +58,9 @@
 - [x] create-story — Story 2.2
 - [x] dev-story — Story 2.2 (workflow finalized; no product-code changes)
 - [x] code-review — Story 2.2
+- [x] create-story — Story 2.3
+- [x] dev-story — Story 2.3
+- [x] code-review — Story 2.3
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.

@@ -1,9 +1,29 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { BookmarkCard } from "@/components/bookmark-card";
 import type { BookmarkWithTags } from "@/lib/types";
 
-export function BookmarkList({ bookmarks }: Readonly<{ bookmarks: BookmarkWithTags[] }>) {
+type BookmarkListProps = {
+  bookmarks: BookmarkWithTags[];
+};
+
+export function BookmarkList({ bookmarks: initialBookmarks }: Readonly<BookmarkListProps>) {
+  const [bookmarks, setBookmarks] = useState(initialBookmarks);
+
+  useEffect(() => {
+    setBookmarks(initialBookmarks);
+  }, [initialBookmarks]);
+
+  function handleBookmarkUpdate(updatedBookmark: BookmarkWithTags) {
+    setBookmarks((currentBookmarks) =>
+      currentBookmarks.map((bookmark) =>
+        bookmark.id === updatedBookmark.id ? updatedBookmark : bookmark,
+      ),
+    );
+  }
+
   if (bookmarks.length === 0) {
     return (
       <div className="flex min-h-64 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/60 p-8 text-center">
@@ -15,7 +35,7 @@ export function BookmarkList({ bookmarks }: Readonly<{ bookmarks: BookmarkWithTa
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M6.75 4.75A1.75 1.75 0 0 1 8.5 3h7A1.75 1.75 0 0 1 17.25 4.75v15.19a.75.75 0 0 1-1.2.6L12 17.5l-4.05 3.04a.75.75 0 0 1-1.2-.6V4.75Z"
+            d="M6.75 4.75A1.75 1.75 0 0 1 8.5 3h7A1.75 1.75 0 0 1 17.25 4.75v15.19a.75.75 0 0 1-1.2.6L12 17.5l-4.05 3.04a.75.75 0 0 1-1.2.6V4.75Z"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -35,7 +55,7 @@ export function BookmarkList({ bookmarks }: Readonly<{ bookmarks: BookmarkWithTa
       role="list"
     >
       {bookmarks.map((bookmark) => (
-        <BookmarkCard bookmark={bookmark} key={bookmark.id} />
+        <BookmarkCard bookmark={bookmark} key={bookmark.id} onBookmarkUpdate={handleBookmarkUpdate} />
       ))}
     </div>
   );

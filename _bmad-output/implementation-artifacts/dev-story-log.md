@@ -25,3 +25,12 @@
 - Status: `review`
 - Sprint status: `review`
 - Validation: `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`
+
+
+
+## 2026-03-17 — Story 2.3 complete
+- Story: `2-3-edit-bookmark.md`
+- AC1-AC4: implemented inline edit flow in `components/bookmark-edit-form.tsx`, `components/bookmark-card.tsx`, `components/bookmark-list.tsx`, `lib/actions/bookmarks.ts`, `lib/validators/bookmark.ts`
+- Tests: added `tests/story-2-3.test.mjs`
+- Validation: `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`
+- Build note: existing Next.js `middleware.ts` deprecation warning remains non-blocking

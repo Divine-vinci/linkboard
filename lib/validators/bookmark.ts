@@ -26,4 +26,10 @@ export const bookmarkCreateSchema = z.object({
   metadata_status: z.enum(["pending", "success", "failed"]).default("pending"),
 });
 
+export const bookmarkUpdateSchema = z.object({
+  title: z.string().max(500, "Title must be 500 characters or fewer").nullable().optional(),
+  description: z.string().max(2000, "Description must be 2000 characters or fewer").nullable().optional(),
+});
+
 export type BookmarkCreateInput = z.infer<typeof bookmarkCreateSchema>;
+export type BookmarkUpdateInput = z.infer<typeof bookmarkUpdateSchema>;
