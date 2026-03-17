@@ -174,6 +174,73 @@ export async function updateBookmark(
   }
 }
 
+export async function deleteBookmark(id: string): Promise<ActionResult<null>> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      success: false,
+      error: {
+        code: "AUTH_NOT_AUTHENTICATED",
+        message: "You must be signed in to delete a bookmark.",
+      },
+    };
+  }
+
+  if (!id.trim()) {
+    return {
+      success: false,
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "Bookmark ID is required.",
+      },
+    };
+  }
+
+  try {
+    const { count, error } = await supabase
+      .from("bookmarks")
+      .delete({ count: "exact" })
+      .eq("id", id);
+
+    if (error) {
+      return {
+        success: false,
+        error: {
+          code: "BOOKMARK_DELETE_FAILED",
+          message: "We couldn’t delete that bookmark. Try again.",
+        },
+      };
+    }
+
+    if (count === 0) {
+      return {
+        success: false,
+        error: {
+          code: "BOOKMARK_NOT_FOUND",
+          message: "We couldn’t find that bookmark to delete.",
+        },
+      };
+    }
+
+    return {
+      success: true,
+      data: null,
+    };
+  } catch {
+    return {
+      success: false,
+      error: {
+        code: "BOOKMARK_DELETE_FAILED",
+        message: "We couldn’t delete that bookmark. Try again.",
+      },
+    };
+  }
+}
+
 export async function listBookmarks(): Promise<ActionResult<BookmarkWithTags[]>> {
   const supabase = await createClient();
   const {

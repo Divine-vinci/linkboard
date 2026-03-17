@@ -51,7 +51,7 @@ development_status:
   2-1-save-bookmark-with-metadata-fetching: done
   2-2-bookmark-dashboard-and-card-display: done
   2-3-edit-bookmark: done
-  2-4-delete-bookmark: backlog
+  2-4-delete-bookmark: done
   epic-2-retrospective: optional
 
   epic-3: backlog

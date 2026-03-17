@@ -6,10 +6,10 @@
 
 ## Current State
 - Phase: 4
-- Current story: 2.3 Edit Bookmark
+- Current story: 2.4 Delete Bookmark
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Completed Story 2.3 code-review via fallback review path, fixed remaining review issues, synced story + sprint artifacts, and re-verified `npm test`, `npm run typecheck`, `npm run lint`, and `npm run build` successfully.
-- Next step: Commit & push Story 2.3, then start story 2.4: Delete Bookmark via Phase 4 story loop
+- Last action: Implemented Story 2.4 Delete Bookmark locally and verified with `npm test && npm run typecheck && npm run lint && npm run build`.
+- Next step: Commit & push Story 2.4 Delete Bookmark, record the commit hash, then start Story 3.1 via the Phase 4 loop
 
 ## ACP Session
 - acp_session_key: agent:claude:acp:6c59364d-a77f-4163-9ef9-8d4c94807c74

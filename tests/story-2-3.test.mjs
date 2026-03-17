@@ -219,6 +219,6 @@ test("AC1-AC4 edit UI wires inline form, optimistic updates, accessibility, and 
   assert.ok(formSrc.includes('event.key === "Escape"'), "BookmarkEditForm must support Escape to cancel");
   assert.ok(formSrc.includes("onSave(optimisticBookmark)"), "BookmarkEditForm must apply optimistic updates before server response");
   assert.ok(formSrc.includes("onSave(bookmark)"), "BookmarkEditForm must revert optimistic updates on failure");
-  assert.ok(formSrc.includes("onCancel();"), "BookmarkEditForm must close after a successful save");
+  assert.ok(formSrc.includes("onSaveComplete("), "BookmarkEditForm must signal success via onSaveComplete callback");
   assert.ok(cardSrc.includes("Bookmark updated."), "BookmarkCard must show a success confirmation after saving");
 });

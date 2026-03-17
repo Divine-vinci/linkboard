@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { BookmarkEditForm } from "@/components/bookmark-edit-form";
 import type { BookmarkWithTags } from "@/lib/types";
@@ -17,12 +17,22 @@ function getImageAlt(bookmark: BookmarkWithTags) {
 type BookmarkCardProps = {
   bookmark: BookmarkWithTags;
   onBookmarkUpdate: (updated: BookmarkWithTags) => void;
+  onBookmarkDelete: (bookmarkId: string) => Promise<void>;
+  deleteError?: string | null;
 };
 
-export function BookmarkCard({ bookmark, onBookmarkUpdate }: Readonly<BookmarkCardProps>) {
+export function BookmarkCard({
+  bookmark,
+  onBookmarkUpdate,
+  onBookmarkDelete,
+  deleteError,
+}: Readonly<BookmarkCardProps>) {
   const [failedImageUrl, setFailedImageUrl] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const cancelDeleteButtonRef = useRef<HTMLButtonElement | null>(null);
   const showImage = Boolean(bookmark.og_image_url) && failedImageUrl !== bookmark.og_image_url;
 
   useEffect(() => {
@@ -37,6 +47,25 @@ export function BookmarkCard({ bookmark, onBookmarkUpdate }: Readonly<BookmarkCa
     return () => window.clearTimeout(timeoutId);
   }, [successMessage]);
 
+  useEffect(() => {
+    if (!isConfirmingDelete) {
+      return undefined;
+    }
+
+    cancelDeleteButtonRef.current?.focus();
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsConfirmingDelete(false);
+        setIsDeleting(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isConfirmingDelete]);
+
   function handleSave(updated: BookmarkWithTags) {
     onBookmarkUpdate(updated);
   }
@@ -45,6 +74,11 @@ export function BookmarkCard({ bookmark, onBookmarkUpdate }: Readonly<BookmarkCa
     onBookmarkUpdate(updated);
     setIsEditing(false);
     setSuccessMessage("Bookmark updated.");
+  }
+
+  async function handleDeleteConfirm() {
+    setIsDeleting(true);
+    await onBookmarkDelete(bookmark.id);
   }
 
   return (
@@ -112,17 +146,29 @@ export function BookmarkCard({ bookmark, onBookmarkUpdate }: Readonly<BookmarkCa
                 ) : null}
               </div>
 
-              {!isEditing ? (
-                <button
-                  className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
-                  onClick={() => {
-                    setSuccessMessage(null);
-                    setIsEditing(true);
-                  }}
-                  type="button"
-                >
-                  Edit
-                </button>
+              {!isEditing && !isConfirmingDelete ? (
+                <div className="flex items-center gap-2">
+                  <button
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+                    onClick={() => {
+                      setSuccessMessage(null);
+                      setIsEditing(true);
+                    }}
+                    type="button"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+                    onClick={() => {
+                      setSuccessMessage(null);
+                      setIsConfirmingDelete(true);
+                    }}
+                    type="button"
+                  >
+                    Delete
+                  </button>
+                </div>
               ) : null}
             </div>
 
@@ -156,6 +202,41 @@ export function BookmarkCard({ bookmark, onBookmarkUpdate }: Readonly<BookmarkCa
                 >
                   <span className="truncate">{bookmark.url}</span>
                 </a>
+
+                {isConfirmingDelete ? (
+                  <div className="space-y-3 rounded-xl border border-red-100 bg-red-50 p-4">
+                    <p className="text-sm font-medium text-slate-700">Delete this bookmark?</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        aria-label="Cancel delete bookmark"
+                        className="rounded-lg px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+                        disabled={isDeleting}
+                        onClick={() => {
+                          setIsConfirmingDelete(false);
+                          setIsDeleting(false);
+                        }}
+                        ref={cancelDeleteButtonRef}
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        aria-label="Confirm delete bookmark"
+                        className="rounded-lg bg-red-600 px-4 py-2 text-sm text-white transition hover:bg-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 disabled:opacity-50"
+                        disabled={isDeleting}
+                        onClick={handleDeleteConfirm}
+                        type="button"
+                      >
+                        {isDeleting ? "Deleting..." : "Delete"}
+                      </button>
+                    </div>
+                    {deleteError ? (
+                      <p className="text-sm text-red-700" role="alert">
+                        {deleteError}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
 
                 {successMessage ? (
                   <p className="text-sm text-emerald-700" role="status">
