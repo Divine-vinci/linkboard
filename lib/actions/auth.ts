@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import type { ActionResult } from "@/lib/types";
+import { getAppUrl } from "@/lib/env";
 import { createClient } from "@/lib/supabase/server";
 import { emailSchema } from "@/lib/validators/auth";
 
@@ -31,19 +32,20 @@ function buildAuthCallbackUrl(origin: string, redirectedFrom?: string) {
 }
 
 async function getOrigin() {
+  const configuredAppUrl = getAppUrl();
+
+  if (configuredAppUrl !== "http://localhost:3000") {
+    return configuredAppUrl;
+  }
+
   const headerStore = await headers();
   const originHeader = headerStore.get("origin");
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (originHeader) {
     return originHeader;
   }
 
-  if (siteUrl) {
-    return siteUrl;
-  }
-
-  return "http://localhost:3000";
+  return configuredAppUrl;
 }
 
 export async function signInWithMagicLink(

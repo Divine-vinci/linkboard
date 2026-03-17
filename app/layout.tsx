@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { getAppUrl } from "@/lib/env";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,9 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://linkboard.app",
-  ),
+  metadataBase: new URL(getAppUrl()),
   title: "Linkboard",
   description: "Save, tag, and find links without losing context.",
 };
