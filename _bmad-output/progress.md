@@ -8,8 +8,8 @@
 - Phase: 4
 - Current story: 3.1 Tag Creation & Assignment
 - Working directory: /home/clawd/projects/linkboard
-- Last action: Completed Story 2.4 Delete Bookmark, committed and pushed `[BMAD Phase 4] Story 2.4: Delete Bookmark` (`03fe81d`).
-- Next step: Start story 3.1: Tag Creation & Assignment via the Phase 4 loop
+- Last action: Heartbeat polled subagent session `agent:main:subagent:1948e915-4a64-445d-9665-f27d06c60c59`, confirmed Story 3.1 dev-story completed, resumed stalled `code-review`, and spawned ACP session `agent:claude:acp:24d28701-3f6d-4b13-a7a7-b5c415698099`.
+- Next step: Poll ACP session agent:claude:acp:24d28701-3f6d-4b13-a7a7-b5c415698099 for code-review completion
 
 ## ACP Session
 - acp_session_key: agent:claude:acp:6c59364d-a77f-4163-9ef9-8d4c94807c74
@@ -62,6 +62,9 @@
 - [x] dev-story — Story 2.3
 - [x] code-review — Story 2.3
 - [x] Story 2.4 loop complete (commit: 03fe81d)
+- [x] create-story — Story 3.1
+- [x] dev-story — Story 3.1
 
 ## Blockers
 - Mission Control project/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.
+/task creation returned duplicate/conflict responses during setup; pipeline continuing with progress.md as source of truth.

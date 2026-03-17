@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import { createBookmark } from "@/lib/actions/bookmarks";
+import { createTagsAndAssign } from "@/lib/actions/tags";
+import { TagInput } from "@/components/tag-input";
 import { urlSchema } from "@/lib/validators/bookmark";
 
 type MetadataResponse = {
@@ -23,6 +25,7 @@ const emptyMetadata: MetadataResponse = {
 export function BookmarkForm() {
   const router = useRouter();
   const [url, setUrl] = useState("");
+  const [tagNames, setTagNames] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -75,8 +78,19 @@ export function BookmarkForm() {
         return;
       }
 
+      let nextSuccessMessage = "Bookmark saved.";
+
+      if (tagNames.length > 0) {
+        const tagsResult = await createTagsAndAssign(bookmarkResult.data.id, tagNames);
+
+        if (!tagsResult.success) {
+          nextSuccessMessage = "Bookmark saved, but we couldn’t save the tags. Try editing the bookmark.";
+        }
+      }
+
       setUrl("");
-      setSuccessMessage("Bookmark saved.");
+      setTagNames([]);
+      setSuccessMessage(nextSuccessMessage);
       router.refresh();
     });
   }
@@ -99,6 +113,8 @@ export function BookmarkForm() {
           value={url}
         />
       </div>
+
+      <TagInput disabled={isPending} label="Tags" onChange={setTagNames} value={tagNames} />
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <button

@@ -34,3 +34,23 @@
 - Tests: added `tests/story-2-3.test.mjs`
 - Validation: `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`
 - Build note: existing Next.js `middleware.ts` deprecation warning remains non-blocking
+
+
+## Dev Story Run — Blocked (2026-03-17)
+- Active workflow: `dev-story`
+- Step: `1` (`Find next ready story and load it`)
+- Sprint file: `_bmad-output/implementation-artifacts/sprint-status.yaml`
+- Finding: `development_status[3-1-tag-creation-and-assignment] = backlog`, not `ready-for-dev`/`in-progress`.
+- Artifact search: no story file for Story 3.1 exists under `_bmad-output/implementation-artifacts/`.
+- Constraint hit: `instructions.xml` Step 1 requires a readable story file and halts if the story file is inaccessible.
+- Result: workflow cannot proceed to implementation without the generated Story 3.1 markdown artifact.
+
+
+## 2026-03-17 — Story 3.1 created (create-story workflow)
+- Story: `3-1-tag-creation-and-assignment.md`
+- Epic 3 status: updated from `backlog` → `in-progress`
+- Story status: `ready-for-dev`
+- Context engine: analyzed epics, architecture, PRD, previous story (2-4), git history, existing codebase
+- Files to create: `lib/validators/tag.ts`, `lib/actions/tags.ts`, `components/tag-input.tsx`
+- Files to modify: `bookmark-form.tsx`, `bookmark-edit-form.tsx`, `bookmark-list.tsx`
+- No new migrations needed — tags, bookmark_tags, RLS already exist

@@ -3,17 +3,7 @@
   "projectPath": "/home/clawd/projects/linkboard",
   "createdAt": "2026-03-15T21:53:08.129Z",
   "currentPhase": "implementation",
-  "activeWorkflow": {
-    "id": "create-story",
-    "agentId": "sm",
-    "agentName": "Bob",
-    "mode": "yolo",
-    "currentStep": 1,
-    "totalSteps": null,
-    "currentStepFile": "/home/clawd/.openclaw/extensions/bmad-method/bmad-method/bmm/workflows/4-implementation/create-story/workflow.yaml",
-    "outputFile": "",
-    "startedAt": "2026-03-17T07:27:08.234Z"
-  },
+  "activeWorkflow": null,
   "completedWorkflows": [
     {
       "id": "create-architecture",
@@ -202,6 +192,36 @@
       "agentId": "dev",
       "outputFile": "",
       "completedAt": "2026-03-17T07:26:36.975Z"
+    },
+    {
+      "id": "create-story",
+      "agentId": "sm",
+      "outputFile": "",
+      "completedAt": "2026-03-17T08:30:52.198Z"
+    },
+    {
+      "id": "dev-story",
+      "agentId": "dev",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/dev-story-log.md",
+      "completedAt": "2026-03-17T08:49:54.922Z"
+    },
+    {
+      "id": "create-story",
+      "agentId": "sm",
+      "outputFile": "",
+      "completedAt": "2026-03-17T09:01:20.048Z"
+    },
+    {
+      "id": "dev-story",
+      "agentId": "dev",
+      "outputFile": "/home/clawd/projects/linkboard/_bmad-output/implementation-artifacts/3-1-tag-creation-and-assignment.md",
+      "completedAt": "2026-03-17T09:09:05.839Z"
+    },
+    {
+      "id": "code-review",
+      "agentId": "dev",
+      "outputFile": "",
+      "completedAt": "2026-03-17T10:00:51.978Z"
     }
   ]
 }

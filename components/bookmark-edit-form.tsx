@@ -3,6 +3,8 @@
 import { useEffect, useId, useRef, useState, useTransition } from "react";
 
 import { updateBookmark } from "@/lib/actions/bookmarks";
+import { updateBookmarkTags } from "@/lib/actions/tags";
+import { TagInput } from "@/components/tag-input";
 import type { BookmarkWithTags } from "@/lib/types";
 import { bookmarkUpdateSchema } from "@/lib/validators/bookmark";
 
@@ -13,14 +15,24 @@ type BookmarkEditFormProps = {
   onCancel: () => void;
 };
 
+function buildOptimisticTags(userId: string, tagNames: string[]) {
+  return tagNames.map((tagName) => ({
+    id: `temp-${tagName}`,
+    user_id: userId,
+    name: tagName,
+  }));
+}
+
 export function BookmarkEditForm({ bookmark, onSave, onSaveComplete, onCancel }: Readonly<BookmarkEditFormProps>) {
   const [title, setTitle] = useState(bookmark.title ?? "");
   const [description, setDescription] = useState(bookmark.description ?? "");
+  const [tagNames, setTagNames] = useState(bookmark.tags.map((tag) => tag.name));
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isUpdating, startTransition] = useTransition();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const titleInputId = useId();
   const descriptionInputId = useId();
+  const tagInputId = useId();
 
   useEffect(() => {
     titleInputRef.current?.focus();
@@ -29,6 +41,7 @@ export function BookmarkEditForm({ bookmark, onSave, onSaveComplete, onCancel }:
   function handleCancel() {
     setTitle(bookmark.title ?? "");
     setDescription(bookmark.description ?? "");
+    setTagNames(bookmark.tags.map((tag) => tag.name));
     setErrorMessage(null);
     onCancel();
   }
@@ -51,22 +64,38 @@ export function BookmarkEditForm({ bookmark, onSave, onSaveComplete, onCancel }:
       const optimisticBookmark: BookmarkWithTags = {
         ...bookmark,
         ...parsedInput.data,
+        tags: buildOptimisticTags(bookmark.user_id, tagNames),
       };
 
       onSave(optimisticBookmark);
 
-      const result = await updateBookmark(bookmark.id, parsedInput.data);
+      const [bookmarkResult, tagsResult] = await Promise.all([
+        updateBookmark(bookmark.id, parsedInput.data),
+        updateBookmarkTags(bookmark.id, tagNames),
+      ]);
 
-      if (!result.success) {
+      if (!bookmarkResult.success) {
         onSave(bookmark);
-        setErrorMessage(result.error.message);
+        setErrorMessage(bookmarkResult.error.message);
+        return;
+      }
+
+      if (!tagsResult.success) {
+        // Bookmark was saved; only tags failed. Show actual server state
+        // (updated bookmark fields + original tags) so the UI stays consistent.
+        onSave({
+          ...bookmark,
+          ...bookmarkResult.data,
+          tags: bookmark.tags,
+        });
+        setErrorMessage(tagsResult.error.message);
         return;
       }
 
       onSaveComplete({
         ...bookmark,
-        ...result.data,
-        tags: bookmark.tags,
+        ...bookmarkResult.data,
+        tags: tagsResult.data,
       });
     });
   }
@@ -109,6 +138,8 @@ export function BookmarkEditForm({ bookmark, onSave, onSaveComplete, onCancel }:
           value={description}
         />
       </div>
+
+      <TagInput disabled={isUpdating} id={tagInputId} label="Tags" onChange={setTagNames} value={tagNames} />
 
       <div className="flex items-center justify-end gap-3">
         <button
